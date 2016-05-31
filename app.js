@@ -1,5 +1,4 @@
 import mongodb from 'mongodb';
-import {runGenerator } from './Utils';
 
 const MongoClient = mongodb.MongoClient;
 const DB_URL = 'mongodb://127.0.0.1:27017/test';
@@ -7,9 +6,9 @@ const DB_URL = 'mongodb://127.0.0.1:27017/test';
 function Connect(url){
     MongoClient.connect(url,(err,db) =>{
       console.log('db:');
-      if (!err){
-        console.error('errorN');
-        it.throw(new Error('Custom Error'));
+      if (err){
+        console.error(err);
+        it.throw(new Error('Db Error'+err.message));
       }
       it.next(db);
     })
